@@ -58,6 +58,7 @@ def edit_item(id):
     item = Item.query.get_or_404(id)
     if request.method == 'POST':
         item.quantity = request.form['quantity']
+        item.description = request.form.get('description')
         db.session.commit()
         flash('Item quantity updated successfully')
         return redirect(url_for('index'))

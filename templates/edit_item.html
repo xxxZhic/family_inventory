@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>编辑物品 Edit Item Quantity</h1>
+        <h1>编辑物品 Edit Item</h1>
         <form method="POST">
             <div class="form-group">
                 <label for="name">物品名称 Name</label>
@@ -18,7 +18,13 @@
                 <label for="quantity">数量 Quantity</label>
                 <input type="number" class="form-control" id="quantity" name="quantity" value="{{ item.quantity }}" required>
             </div>
+            <div class="form-group">
+                <label for="description">描述 Description</label>
+                <textarea class="form-control" id="description" name="description" rows="3">{{ item.description }}</textarea>
+            </div>
             <button type="submit" class="btn btn-primary">更新 Update</button>
+            <a href="{{ url_for('index') }}" class="btn btn-secondary">返回 Back</a>
+
         </form>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
