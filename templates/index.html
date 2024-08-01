@@ -22,6 +22,7 @@
                     <br>
                     <small>添加时间 Added on: {{ item.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</small>
                 </div>
+                <a href="{{ url_for('edit_item', id=item.id) }}" class="btn btn-secondary">编辑 Edit</a>
                 <a href="{{ url_for('delete_item', id=item.id) }}" class="btn btn-danger">删除 Delete</a>
             </li>
             {% endfor %}

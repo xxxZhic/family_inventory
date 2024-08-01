@@ -53,5 +53,16 @@ def confirm_delete_item(id):
     flash('Item Deleted Successfully')
     return redirect(url_for('index'))
 
+@app.route('/edit/<int:id>', methods=['GET', 'POST'])
+def edit_item(id):
+    item = Item.query.get_or_404(id)
+    if request.method == 'POST':
+        item.quantity = request.form['quantity']
+        db.session.commit()
+        flash('Item quantity updated successfully')
+        return redirect(url_for('index'))
+    return render_template('edit_item.html', item=item)
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5001, debug=True)
