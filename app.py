@@ -26,6 +26,14 @@ def add_item():
         quantity = request.form['quantity']
         unit = request.form['unit']  
         description = request.form.get('description')
+        try:
+            quantity = int(quantity)
+            if quantity <= 1:
+                flash('数量必须大于1 Quantity must be greater than 1', 'error')
+                return redirect(url_for('add_item'))
+        except ValueError:
+            flash('Quantity must be a number', 'error')
+            return redirect(url_for('add_item'))
 
         new_item = Item(name=name, quantity=quantity, unit=unit, description=description) 
         db.session.add(new_item)
@@ -57,8 +65,21 @@ def confirm_delete_item(id):
 def edit_item(id):
     item = Item.query.get_or_404(id)
     if request.method == 'POST':
-        item.quantity = request.form['quantity']
-        item.description = request.form.get('description')
+        quantity = request.form['quantity']
+        description = request.form.get('description')
+
+        # Validate quantity
+        try:
+            quantity = int(quantity)
+            if quantity <= 1:
+                flash('数量必须大于1 Quantity must be greater than 1', 'error')
+                return redirect(url_for('edit_item', id=id))
+        except ValueError:
+            flash('Quantity must be a number', 'error')
+            return redirect(url_for('edit_item', id=id))
+
+        item.quantity = quantity
+        item.description = description
         db.session.commit()
         flash('Item quantity updated successfully')
         return redirect(url_for('index'))

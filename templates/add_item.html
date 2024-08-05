@@ -9,6 +9,17 @@
 <body>
     <div class="container">
         <h1 class="mt-4">添加新物品 Add New Item</h1>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="alert alert-danger" role="alert">
+                    <ul>
+                        {% for category, message in messages %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        {% endwith %}
         <form method="POST">
             <div class="form-group">
                 <label for="name">名称 Name</label>
