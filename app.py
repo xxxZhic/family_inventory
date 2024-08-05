@@ -28,8 +28,8 @@ def add_item():
         description = request.form.get('description')
         try:
             quantity = int(quantity)
-            if quantity <= 1:
-                flash('数量必须大于1 Quantity must be greater than 1', 'error')
+            if quantity < 1:
+                flash('数量必须大于等于1 Quantity must be greater than or equal to 1', 'error')
                 return redirect(url_for('add_item'))
         except ValueError:
             flash('Quantity must be a number', 'error')
@@ -71,8 +71,8 @@ def edit_item(id):
         # Validate quantity
         try:
             quantity = int(quantity)
-            if quantity <= 1:
-                flash('数量必须大于1 Quantity must be greater than 1', 'error')
+            if quantity < 1:
+                flash('数量必须大于等于1 Quantity must be greater than or equal to 1', 'error')
                 return redirect(url_for('edit_item', id=id))
         except ValueError:
             flash('Quantity must be a number', 'error')
